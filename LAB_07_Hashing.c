@@ -19,6 +19,12 @@ void destroyRandomHashFunction(struct RandomHashFunction* randomFn) {
     free(randomFn->fnTable);
 }
 
+struct HashTable {
+    int miAtributo;
+    int** bucket;
+    struct RandomHashFunction hashFunction;
+};
+
 struct HashTable* createHashTable(int h, int n) {
     struct HashTable* table = (struct HashTable*)malloc(sizeof(struct HashTable));
     table->miAtributo = h;
@@ -32,13 +38,9 @@ struct HashTable* createHashTable(int h, int n) {
     return table;
 }
 
-
-struct HashTable {
-    int miAtributo;
-    int** bucket;
-    struct RandomHashFunction hashFunction;
-};
-
+int mi_Mod(int x, int n) {
+    return x % n;
+}
 
 
 int main()
