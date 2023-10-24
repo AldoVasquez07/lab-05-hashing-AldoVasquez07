@@ -68,7 +68,35 @@ void insert(struct HashTable* table, int x) {
     table->bucket[index] = newList;
 }
 
+void removeItem(struct HashTable* table, int x) {
+    int index = table->hashFunction.fnTable[x];
+    if (table->bucket[index] != NULL) {
+        int length = 0;
+        while (table->bucket[index][length] != -1) {
+            length++;
+        }
 
+        int* newList = (int*)malloc((length - 1) * sizeof(int));
+        int i = 0;
+        int j = 0;
+
+        while (i < length) {
+            if (table->bucket[index][i] != x) {
+                newList[j] = table->bucket[index][i];
+                j++;
+            }
+            i++;
+        }
+
+        free(table->bucket[index]);
+        if (j > 0) {
+            newList[j] = -1;
+            table->bucket[index] = newList;
+        } else {
+            table->bucket[index] = NULL;
+        }
+    }
+}
 
 
 int main()
