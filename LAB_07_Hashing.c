@@ -6,6 +6,8 @@ struct RandomHashFunction {
     int* fnTable;
 };
 
+
+
 void initRandomHashFunction(struct RandomHashFunction* randomFn, int M, int n) {
     randomFn->fnTable = (int*)malloc(M * sizeof(int));
     srand(time(NULL));
@@ -123,9 +125,21 @@ void destroyHashTable(struct HashTable* table) {
     free(table);
 }
 
-int main()
-{
-    cout<<"Hello World";
+int main() {
+    struct HashTable* hashTable = createHashTable(7, 10);
+
+    insert(hashTable, 7);
+    insert(hashTable, 15);
+    insert(hashTable, 25);
+
+    printf("Buscando 15: %d\n", find(hashTable, 15));
+    printf("Buscando 7: %d\n", find(hashTable, 7));
+
+    removeItem(hashTable, 15);
+
+    printf("Buscando 15 después de eliminarlo: %d\n", find(hashTable, 15));
+
+    destroyHashTable(hashTable);
 
     return 0;
 }
