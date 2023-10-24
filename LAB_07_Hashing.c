@@ -98,6 +98,19 @@ void removeItem(struct HashTable* table, int x) {
     }
 }
 
+int find(struct HashTable* table, int x) {
+    int index = table->hashFunction.fnTable[x];
+    if (table->bucket[index] != NULL) {
+        int i = 0;
+        while (table->bucket[index][i] != -1) {
+            if (table->bucket[index][i] == x) {
+                return x;
+            }
+            i++;
+        }
+    }
+    return -1;
+}
 
 int main()
 {
