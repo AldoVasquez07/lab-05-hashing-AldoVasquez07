@@ -15,7 +15,10 @@ void initRandomHashFunction(struct RandomHashFunction* randomFn, int M, int n) {
     }
 }
 
-void destroyRandomHashFunction(struct RandomHashFunction* randomFn);
+void destroyRandomHashFunction(struct RandomHashFunction* randomFn) {
+    free(randomFn->fnTable);
+}
+
 
 struct HashTable {
     int miAtributo;
