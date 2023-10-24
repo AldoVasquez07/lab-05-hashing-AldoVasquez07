@@ -6,7 +6,15 @@ struct RandomHashFunction {
     int* fnTable;
 };
 
-void initRandomHashFunction(struct RandomHashFunction* randomFn, int M, int n);
+void initRandomHashFunction(struct RandomHashFunction* randomFn, int M, int n) {
+    randomFn->fnTable = (int*)malloc(M * sizeof(int));
+    srand(time(NULL));
+
+    for (int x = 0; x < M; x++) {
+        randomFn->fnTable[x] = rand() % n;
+    }
+}
+
 void destroyRandomHashFunction(struct RandomHashFunction* randomFn);
 
 struct HashTable {
@@ -14,6 +22,8 @@ struct HashTable {
     int** bucket;
     struct RandomHashFunction hashFunction;
 };
+
+
 
 int main()
 {
