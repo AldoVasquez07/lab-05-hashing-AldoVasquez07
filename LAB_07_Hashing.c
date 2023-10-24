@@ -112,6 +112,17 @@ int find(struct HashTable* table, int x) {
     return -1;
 }
 
+void destroyHashTable(struct HashTable* table) {
+    for (int i = 0; i < table->miAtributo; i++) {
+        if (table->bucket[i] != NULL) {
+            free(table->bucket[i]);
+        }
+    }
+    free(table->bucket);
+    destroyRandomHashFunction(&(table->hashFunction));
+    free(table);
+}
+
 int main()
 {
     cout<<"Hello World";
